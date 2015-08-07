@@ -21,7 +21,9 @@
  */
 
 
-//Cambios ecternos a la aplicaciÛn de GitHub
+//Cambios ecternos a la aplicaci√≥n de GitHub
+
+//Cambios para observar la prueba de actualizaci√≥n desde el navegador en GitHub
 
 
 /*
@@ -184,10 +186,10 @@ void Main_ini(void){
 		mainflags&=0xFD;	//Borra bandera Online Modo stand alone
 //		if (!(EEPROM_read(add_RSLGPLN_Ena)))mainflags|=0x08;else; // Habilita Logo pleno on RESET 
 		//else mainflags&=0xF7; //Inhabilita Logo pleno on RESET
-		main_mode=4; //Modo de operaciÛn --ExhibiciÛn de LOGO
+		main_mode=4; //Modo de operaci√≥n --Exhibici√≥n de LOGO
 	//--- Prueba_pant	
 		fp_pant=0;	//Registro MT		
-		ipant=0;	//Acumulador para alimentaciÛn de trama
+		ipant=0;	//Acumulador para alimentaci√≥n de trama
 	    tpant=0;	//Acumulador para conteo de tramas
 		ppant_timer_flags=0;//Banderas timer prueba pantalla ---Public
 		ppant_timer1_max=0;	//Puntero tope timer1 pantalla ---Public
@@ -197,21 +199,21 @@ void Main_ini(void){
 		tto=0;				//Acumulador Test timeout --- Public
 	//--- Prueba_lvert
 		fplv=0;		//Registro MT
-		s_line=0;	//PosiciÛn de lÌnea para prueba
+		s_line=0;	//Posici√≥n de l√≠nea para prueba
 	//--- Prueba_lhz
 		flhz=0;		//Registro MT
-		h_line=23;	//PosiciÛn de lÌnea para prueba
+		h_line=23;	//Posici√≥n de l√≠nea para prueba
 		/*
-			h_lb1;(No necesario iniciar)	//LÌnea a encender en bloque 1 (top)
-			h_lb2;(No necesario iniciar)	//LÌnea a encender en bloque 2 (Middle)
-			h_lb3;(No necesario iniciar)	//LÌnea a encender en bloque 3 (Bottom)	
+			h_lb1;(No necesario iniciar)	//L√≠nea a encender en bloque 1 (top)
+			h_lb2;(No necesario iniciar)	//L√≠nea a encender en bloque 2 (Middle)
+			h_lb3;(No necesario iniciar)	//L√≠nea a encender en bloque 3 (Bottom)	
 			mblock;(No necesario iniciar)	//No. Minibloque
-			char mbline;(No necesario iniciar)	//No. lÌnea en minibloque
-			mblpix;(No necesario iniciar)	//No. pixel en lÌnea de minibloque
+			char mbline;(No necesario iniciar)	//No. l√≠nea en minibloque
+			mblpix;(No necesario iniciar)	//No. pixel en l√≠nea de minibloque
 		*/		
 	//--- Pleno_logo
 		fpll=0;		//Registro MT
-		//scroll;(No necesario iniciar)	//temporal para exhibiciÛn
+		//scroll;(No necesario iniciar)	//temporal para exhibici√≥n
 	//--- Boton
 		fboton=0;		//Registro MT
 	
@@ -233,8 +235,8 @@ void Prueba_pant(void){
 			for (ipant=0;ipant<1024;ipant++){			
 				if (ipant&0x01){DT1_H;}else {DT1_L;}	//Lineas verticales
 				if (ipant&0x04){DT2_H;}else {DT2_L;}	//Lineas horizontales
-				if (((ipant&0x10)&&!(ipant&0x20))||(!(ipant&0x10)&&(ipant&0x20))){DT3_H;}else {DT3_L;} //MoÒos
-				if (tpant&0x02){if(ipant&0x40){DT3_L;}else;}else{if(!(ipant&0x40)){DT3_L;}else;}	//Apaga moÒo alternado
+				if (((ipant&0x10)&&!(ipant&0x20))||(!(ipant&0x10)&&(ipant&0x20))){DT3_H;}else {DT3_L;} //Mo√±os
+				if (tpant&0x02){if(ipant&0x40){DT3_L;}else;}else{if(!(ipant&0x40)){DT3_L;}else;}	//Apaga mo√±o alternado
 				//if (ipant&0x01){DT4_H;DT8_H;}else {DT4_L;DT8_L;}	//Lineas verticales	
 				//CK1_H;CK2_H;CK3_H;CK_delay;	CK1_L;CK2_L;CK3_L;CK_delay;	//Pulso CK
 				PCK_H;CK_delay;PCK_L;CK_delay;	//Pulso CK
@@ -354,10 +356,10 @@ void Prueba_lhz(void){
 /**********************************************************************
 							Boton()
 ***********************************************************************/
-void Boton (void){		//Respuesta a botÛn presionado
+void Boton (void){		//Respuesta a bot√≥n presionado
 	switch (fboton){
 		case 0:
-			if (_boton_on){	//Espera hasta que estÈ presionado el botÛn		
+			if (_boton_on){	//Espera hasta que est√© presionado el bot√≥n		
 				bdbnc_max=_boton_debounce_time;
 				ppant_timer_flags&=0xFC;	//Reporta Deboucing timing, BORRA Debouncing y Longpress detection flag
 				ppant_timer_flags|=0x01;	//SET Button Debouncer timer flag			
@@ -366,14 +368,14 @@ void Boton (void){		//Respuesta a botÛn presionado
 			break;		
 		case 1:			
 			if (!(ppant_timer_flags&0x01)){	//Retardo debouncing terminado			
-				if (_boton_on){	//Si se confirma botÛn presionado
+				if (_boton_on){	//Si se confirma bot√≥n presionado
 					if(mainflags&0x01)mainflags&=0xFE;else mainflags|=0x01; //Play-Pausa Toggle					
-					bdbnc_max=_boton_function_time;		//Carga en timer periodo funciÛn push extendido
-					ppant_timer_flags|=0x03;			//Activa timer para detecciÛn de funciÛn push extendido	
+					bdbnc_max=_boton_function_time;		//Carga en timer periodo funci√≥n push extendido
+					ppant_timer_flags|=0x03;			//Activa timer para detecci√≥n de funci√≥n push extendido	
 					tto=0;	//Reinicia timer Test timeout
 					ppant_timer_flags|=0x04;
 					fboton=2;
-				}else fboton=0;  //Si no hay botÛn presionado				
+				}else fboton=0;  //Si no hay bot√≥n presionado				
 			}else;	//Deboncing en proceso
 			break;			
 		case 2:			
@@ -382,14 +384,14 @@ void Boton (void){		//Respuesta a botÛn presionado
 					
 				
 				//--- Control de inicia subrutina pleno logo
-					if(!(ppant_timer_flags&0x08)){	//Si exhibiciÛn logo permitida
-						if(main_mode==0)main_mode=4;else;	//Conmuta a exhibiciÛn de LOGO
-					}else ppant_timer_flags&=0xF7;	//salta evaluaciÛn de exhib logo, borra solicitud
-				//---Reinicia timer cambio de funciÛn					
+					if(!(ppant_timer_flags&0x08)){	//Si exhibici√≥n logo permitida
+						if(main_mode==0)main_mode=4;else;	//Conmuta a exhibici√≥n de LOGO
+					}else ppant_timer_flags&=0xF7;	//salta evaluaci√≥n de exhib logo, borra solicitud
+				//---Reinicia timer cambio de funci√≥n					
 					ppant_timer_flags&=0xFC;	//Reinicia bandera timer
 					bdbnc=0;	//Reinicia contador retardo	debouncer		
-				fboton=0;	//reinicia subrutina BotÛn
-			}else;	//Espera hasta que estÈ liberado el botÛn						
+				fboton=0;	//reinicia subrutina Bot√≥n
+			}else;	//Espera hasta que est√© liberado el bot√≥n						
 			break;
 	}
 }
